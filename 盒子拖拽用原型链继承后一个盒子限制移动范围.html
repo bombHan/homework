@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		#div1{cursor: pointer;height: 100px;width: 100px;position: absolute;left: 0;top: 0;background: red;}
+		#div2{cursor: pointer;height: 100px;width: 100px;position: absolute;left: 100px;top: 0;background:blue;}
+	</style>
+</head>
+<body>
+	<div id="div1">		
+	</div>
+	<div id="div2">	
+	</div>
+	<script>
+//		父级定义拖拽盒子
+		function Move(id){
+			this.oBox=document.getElementById(id);
+		};
+		
+		Move.prototype.move=function(){
+			var This=this;
+			this.oBox.onmousedown=function(ev){
+				 This.down(ev);
+				 return false;
+			}			
+		};
+		Move.prototype.down=function(ev){
+			    var _this=this;
+				var ev=ev||event;
+			    this.L=ev.clientX-this.oBox.offsetLeft;
+			    this.T=ev.clientY-this.oBox.offsetTop;				
+				document.onmousemove=function(ev){
+					var ev=ev||event;
+					_this.onmove(ev);
+				};
+				document.onmouseup=function(){
+					_this.onup();
+				};
+		};
+		
+		Move.prototype.onmove=function(ev){
+			var ev=ev||event;		
+			this.oBox.style.left=ev.clientX-this.L+'px';
+			this.oBox.style.top=ev.clientY-this.T+'px';
+		}
+		
+		Move.prototype.onup=function(){
+			document.onmousemove = document.onmouseup = null;
+		}
+		
+		
+		var box1=new Move('div1');
+		    box1.move();
+		    
+//定义一个继承函数，让子对象继承父级的方法和属性
+        function extend(son,parent){
+        	for(var arr in parent){
+        		son[arr]=parent[arr];
+        	}
+        };
+        extend(Movewrap.prototype,Move.prototype);
+        
+ //定义子对象       
+        function Movewrap(id){
+        	Move.call(this,id);
+        	this.oWidth = document.documentElement.clientWidth - this.oBox.offsetWidth;
+			this.oHeight = document.documentElement.clientHeight - this.oBox.offsetHeight;
+        };
+         Movewrap.prototype.onmove=function(ev){
+         	var ev=ev||event;	
+         	console.log(this.oBox.offsetTop);
+			this.oBox.style.left=ev.clientX-this.L+'px';
+			this.oBox.style.top=ev.clientY-this.T+'px';
+			
+			if(this.oBox.offsetTop<=0){
+         		this.oBox.style.top=0
+         	}else if(this.oBox.offsetTop>this.oHeight){
+         		this.oBox.style.top=this.oHeight+'px';
+         	};
+         	if(this.oBox.offsetLeft<=0){
+         		this.oBox.style.left=0
+         	}else if(this.oBox.offsetLeft>this.oWidth){
+         		this.oBox.style.left=this.oWidth+'px';
+         	}
+			
+         }
+        var box2=new Movewrap('div2');
+		    box2.move();
+        
+         
+	</script>
+</body>
+</html>

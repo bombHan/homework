@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			.select{float:left;margin: 50px ;overflow: hidden;position: relative;width:142px;height:32px;font-size: 16px;text-align: center;line-height: 30px;cursor: pointer;color: white;opacity: 0.8;}
+			.select .txt{width:140px;height:30px;border: 1px solid #666;border-radius:4px;background: #ccc;}
+			.select .list{position: absolute;width: 140px;background:#ccc;border-radius: 4px;}
+			.select .list li{height: 30px;line-height: 30px;width: 140px;border-bottom: 1px solid white;}
+			.select .list li:hover{background: #00BFFF;}
+		</style>
+	</head>
+	<body>
+		
+	</body>
+	<script src="move.js"></script>
+	<script>
+		
+		 //继承函数 
+		function extend(son,parent){
+			for(var arr in parent){
+				son[arr]=parent[arr];
+			}
+		}	
+		//绑定事件
+		function bind(obj,event,fn){
+				obj.listEvents = obj.listEvents || {};//obj.listEvents ={};
+				obj.listEvents[event]=obj.listEvents[event]|| [];//obj.listEvents={user:[]}
+				obj.listEvents[event].push(fn);//obj.listEvents={user:[fn1,fn2]};
+				
+				if(obj.addEventListener){
+					obj.addEventListener(event,fn,false);
+				}else{
+					obj.attachEvent('on'+event,function(){
+						fn.call(obj)//apply([122333])
+					})
+				}
+			};
+		  
+		function Select(){
+			this.default={
+			    id:'select',
+			    data:[],
+			    index:'默认值',
+			    off:false
+			};
+		};
+		Select.prototype.init=function(options){
+			 var _this=this;
+			 extend(this.default,options);			 
+			 this.aLi=[];
+			 this.oSelect=document.createElement('div');
+			 this.oSelect.className='select';
+             document.body.appendChild(this.oSelect);
+			 this.oTxt=document.createElement('div');
+			 this.oTxt.className='txt';
+			 this.oSelect.appendChild(this.oTxt);
+			 this.oList=document.createElement('ul');
+			 this.oList.className='list';
+			 this.oList.style.height=this.default.data.length*30+'px';
+			 this.oSelect.appendChild(this.oList);
+			 for(var i=0;i<this.default.data.length;i++){
+			 	_this.aLi[i]=document.createElement('li');
+			 	_this.aLi[i].innerHTML=_this.default.data[i];
+			 	_this.oList.appendChild(_this.aLi[i]);
+			 }
+		     this.off=true;
+		     this.oTxt.innerHTML=this.default.index;
+		     
+		  if(this.default.off==false){
+			 this.oSelect.onclick=function(ev){
+				var ev=ev||event;
+				_this.display();
+				ev.cancelBubble=true;
+			};
+			
+		    bind(document,'click',function(){_this.documentDis(_this)});//点击其他部分选项框收回
+			
+		    for(var i=0;i<this.default.data.length;i++){
+		    	_this.aLi[i].index=i;
+		    	_this.aLi[i].onclick=function(){
+		    		 _this.liDisplay(this.index);
+		    	};
+		    }
+		  }else{
+		  	 this.oTxt.innerHTML=this.default.index+"<span style='color:red;font-size:12px'>(这个你可点不开)</span>";
+		   }
+		};
+		
+		Select.prototype.display=function(){
+			if(this.off){
+				 this.oSelect.style.height=(this.default.data.length+1)*31+"px";
+					this.off=false;
+				}else{
+					this.oSelect.style.height='32px';
+					this.off=true;
+				}
+		};
+		
+		Select.prototype.documentDis=function(_this){
+			 _this.oSelect.style.height='32px';
+				this.off=true;
+		};
+		Select.prototype.liDisplay=function(it){
+			 this.oTxt.innerHTML=this.default.data[it];
+		}
+		
+		
+		var s=new Select();
+		s.init({
+			data:['杭州','上海','北京','广州','新疆','台湾'],
+			index:'城市',
+			off:true
+		}); 
+		var s1=new Select();
+		s1.init({
+			data:['2','6','7',10],
+		    index:'2'
+		});
+		var s2=new Select();
+		s2.init({
+			data:['杭州','上海','北京','广州','新疆','台湾'],
+		}); 
+
+	</script>
+</html>

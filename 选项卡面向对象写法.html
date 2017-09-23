@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+li{
+	list-style:none;
+	}
+.tab{
+	width:300px;
+	margin:0 auto;
+	border:1px solid #ccc;
+	float: left;
+	}
+.btn_group {
+	border-bottom:1px solid #ccc;
+	position:relative
+	}
+.btn_group li{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	cursor:pointer
+	}
+#icon{
+	width:20px;
+	height:10px;
+	background:#000;
+	position:absolute;
+	right:-20px
+	}
+.btn_group li{
+	float:left;
+	}
+.btn_group li.active{
+	background:red;
+	color:#fff
+	}
+.cont{
+	height:300px;
+	display:none
+	}
+ul{
+	overflow: hidden;
+}
+.clear{ zoom:1}
+.clear:after{ content:""; display:block; clear:both;}
+</style>
+</head>
+
+<body>
+<div id="tab" class="tab">
+  <ul class="btn_group" >
+  	<li class="active">选项一</li>
+    <li>选项二</li>
+    <li>选项三</li>
+  </ul> 
+  <div class="cont" style="display:block">1111</div>
+  <div class="cont">2222</div>
+  <div class="cont">3333</div>
+</div>
+
+<div id="tab1" class="tab">
+  <ul class="btn_group" >
+  	<li class="active">自动播放</li>
+    <li>选项二</li>
+    <li>选项三</li>
+  </ul> 
+  <div class="cont" style="display:block">1111</div>
+  <div class="cont">2222</div>
+  <div class="cont">3333</div>
+</div>
+
+<script>
+	function Box(json){
+	  this.json=json;
+	  this.oTab= document.getElementById(this.json.id);
+	  this.oUl = this.oTab.getElementsByTagName('ul')[0];
+	  this.aLis = this.oUl.getElementsByTagName('li');
+	  this.aCont = this.oTab.getElementsByClassName("cont");	
+	  this.index=0;
+	}
+	//点击变换选项卡
+	Box.prototype.change=function(){
+		var _this=this;
+		for(var i=0; i<_this.aLis.length;i++){
+		_this.aLis[i].index=i;
+		_this.aLis[i][_this.json.ev]=function(){
+				_this.display(this);
+			}
+		  }
+	}
+	
+	//选项卡变换内部
+	Box.prototype.display=function(This){
+		for(var i=0; i<this.aLis.length;i++){
+				this.aLis[i].className='';
+				this.aCont[i].style.display='none'
+			}
+			This.className='active';
+			this.aCont[This.index].style.display='block';
+			this.index=This.index;
+	}
+	//自动播放
+	Box.prototype.autoplay=function(){
+		 var _this=this;
+		 setInterval(function(){
+		 	_this.index++;
+		 	if(_this.index==3)
+		 	{_this.index=0}
+		 	for(var i=0; i<_this.aLis.length;i++){
+				_this.aLis[i].className='';
+				_this.aCont[i].style.display='none'
+			}
+			_this.aLis[_this.index].className='active';
+			_this.aCont[_this.index].style.display='block';
+		 },1500);
+		 
+	}
+	
+	var box1=new Box({id:'tab',ev:'onclick'});
+	box1.change();
+	var box2=new Box({id:'tab1',ev:'onmouseover'});
+	box2.change();
+	box2.autoplay();
+	
+	/*var oTab= document.getElementById("tab");
+	var oUl = oTab.getElementsByTagName('ul')[0];
+	var aLis = oUl.getElementsByTagName('li');
+	var aCont = oTab.getElementsByClassName("cont");
+	
+	for(var i=0; i<aLis.length;i++){
+		aLis[i].index=i;
+		aLis[i].onclick=function(){
+			for(var i=0; i<aLis.length;i++){
+				aLis[i].className='';
+				aCont[i].style.display='none'
+			}
+			this.className='active';
+			aCont[this.index].style.display='block'
+		}
+	}*/
+
+</script>
+</body>
+</html>
