@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box,#box1{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top:0
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box1">11</div>
+		<script src="jquery-1.8.2.min.js"></script>
+		<script>
+			//options配置参数
+			$.fn.drage=function(options){
+				//默认参数
+				var defaults={
+					startMove:false
+				};
+				//继承
+				var setting = $.extend(defaults,options);
+				
+				var _this = this;
+				this.mousedown(function(ev){
+					var downx = ev.pageX-$(this).offset().left;
+					var downy = ev.pageY-$(this).offset().top
+					var maxWidth = $(window).width() - $(this).outerWidth();
+					var maxHeight = $(window).height() - $(this).outerHeight();
+				
+					$(document).mousemove(function(ev){
+						var moveLeft = ev.pageX - downx;
+						var moveTop = ev.pageY - downy;
+						if(setting.startMove){
+							if(moveTop<0){
+								moveTop=0;
+							}else if(moveTop>=maxHeight){
+								moveTop=maxHeight;
+							}
+							
+							if(moveLeft<0){
+								moveLeft=0;
+							}else if(moveLeft>=maxWidth){
+								moveLeft=maxWidth;
+							}
+						}
+						_this.css('left',moveLeft);
+						_this.css('top',moveTop);
+					});
+					$(document).mouseup(function(){
+						$(document).off();
+					});
+					return false;
+				});
+			};
+			$("#box").drage({
+				startMove:true
+			});
+			$("#box1").drage({});
+		</script>
+	</body>
+</html>
