@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/rest.css"/>
+	<style type="text/css">
+		#box{width: 800px;height: 60px;margin: 0 auto;position: relative;}
+		#bg{width: 800px;height: 60px;font-size:40px;line-height: 60px;}
+		#red{position: absolute;left: 0;top: 0;height: 60px;width: 80px;overflow: hidden;}
+		#word{position: absolute;top:0;left:0;width: 800px;height: 60px;font-size:40px;line-height: 60px;color: red;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="bg">
+			你好，我是一段文字!你好，我是一段文字!
+		</div>
+		<div id="red">
+			<div id="word">
+				你好，我是一段文字!你好，我是一段文字!
+			</div>			
+		</div>
+	</div>
+	
+	<script>
+		var oRed=document.getElementById('red');
+		var oWord=document.getElementById('word');
+		var index=1;
+		setInterval(function(){
+          if(index==1){
+          	oRed.style.left=10+oRed.offsetLeft+'px';
+			oWord.style.left=oWord.offsetLeft-10+'px';
+          	if(oRed.offsetLeft==oWord.offsetWidth-oRed.offsetWidth){
+                     index=0;				
+			 }
+          }else{
+          	oRed.style.left=oRed.offsetLeft-10+'px';
+			oWord.style.left=oWord.offsetLeft+10+'px';
+			if(oRed.offsetLeft==0){
+                     index=1;				
+			   }
+          }		
+		},60);
+	</script>
+</body>
+</html>
+

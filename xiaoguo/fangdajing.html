@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/rest.css"/>
+	<style>
+		#pic{float: left;margin:40px;width: 180px;height: 180px;position: relative;cursor: pointer}
+		#box{display: none;position: absolute;top:0;left:0;height: 60px;width: 60px;background: yellow;opacity: 0.6;filter: alpha(opacity=60);}
+		#plus{float: left;position: relative;width: 500px;height: 500px;overflow: hidden;}
+		#big{position: absolute;top: 0;left: 0;display: block;}
+	</style>
+</head>
+<body>
+	<div id="pic">
+		<img src="img/center0.jpg" />
+		<div id="box"></div>
+	</div>
+	<div id="plus">
+		<img src="img/center1.jpg" id="big" />
+	</div>
+	
+	<script>
+		var oBox=document.getElementById('box');
+		var oPic=document.getElementById('pic');
+		var oPlus=document.getElementById('plus');
+		var oBig=document.getElementById('big');
+
+		
+		//鼠标移入图片的效果
+		   oPic.onmousemove=function(ev){
+	
+			var ev=ev||event;
+			var L=ev.clientX-oPic.offsetLeft-oBox.offsetWidth/2;
+			var T=ev.clientY-oPic.offsetTop-oBox.offsetHeight/2;
+			
+
+			oBox.style.display='block';
+				if(L<0){
+				L=0;
+			}else if(L>oPic.offsetWidth-oBox.offsetWidth){
+				L=oPic.offsetWidth-oBox.offsetWidth;
+			}
+			if(T<0){
+				T=0;
+			} else if(T>oPic.offsetHeight-oBox.offsetHeight){
+				T=oPic.offsetHeight-oBox.offsetHeight
+			}
+//			console.log(L+'t:'+T);
+//			console.log(oPic.offsetWidth-oBox.offsetWidth+':'+oPic.offsetHeight-oBox.offsetHeight)
+			oBox.style.left=L+'px';
+			oBox.style.top=T+'px';		
+		
+			 //以下是放大镜效果
+			oBig.style.left=-L*(oBig.offsetWidth-oPlus.offsetWidth)/(oPic.offsetWidth-oBox.offsetWidth)+'px';
+			oBig.style.top=-T*(oBig.offsetHeight-oPlus.offsetHeight)/(oPic.offsetHeight-oBox.offsetHeight)+'px';				
+		 
+			oPic.onmouseout=function(){
+			  oBox.style.display='none';	
+		       }
+		return false;				
+	}				
+						
+		
+		//鼠标移出图片后框消失
+		
+		
+		
+	</script>
+</body>
+</html>

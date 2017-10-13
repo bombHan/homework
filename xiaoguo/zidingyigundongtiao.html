@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="rest.css"/>
+	<style>
+		#scroll_bg{height: 300px;width: 30px;background: black;float: left;position: relative;}
+		#scroll{position: absolute;top: 0;left: 1px;width: 28px;background: red;cursor: pointer;}
+		#txt{float: left;width:300px;height: 300px;border: 1px solid red;position: relative;overflow: hidden;}
+		#tt{position: absolute;top: 0;left: 0;width: 300px;}
+		
+	</style>
+</head>
+<body>
+	<div id="scroll_bg">
+		<div id="scroll"></div>
+	</div>
+	<div id="txt">
+		<div id="tt">
+			华社北京9月11日电　第二十二届国际检察官联合会年会暨会员代表大会11日上午在北京开幕。国家主席习近平发来贺信，对会议召开表示祝贺。习近平指出，检察官作为公共利益的代表，肩负着重要责任。本届国际检察官联合会年会以“为公益服务的检察”为主题，围绕建设平安、，努力建设中国特色社会主义法治体系、建设社会主义法治国家。中国检察机关是国家的法律监督机关，承担惩治和预防犯罪、对诉讼活动进行监督等职责，是保护监督等职责，是保监督社律监督机关，检察官作为公共利益的代表，肩负着重要责任。本届国际检察官联合会年会以“为公益服务的检察”为主题，围绕建设平安、，努力建设中国特色社会主义法治体系、建，检察官作为公共利益的代表，肩负着重要责任。本届国际检察官联合会年会以“为公益服务的检察”为主题，围绕建设平安、，努力建设中国特色社会主义法治体系、建，承担惩治和预防犯罪、对诉讼活动进行监督等职责，是保护监督等职责，是保监督等职责，是保义法治体系、建设国特色社会主义法治体色社会主义法治体
+		</div>
+		
+	</div>
+	
+	<script>
+		var oScroll=document.getElementById('scroll');
+		var oScrollBg=document.getElementById('scroll_bg');
+		var oTxt=document.getElementById('txt');
+		var oT=document.getElementById('tt');
+		//滚动条高度
+		oScroll.style.height=(oT.offsetHeight-oTxt.offsetHeight)/oT.offsetHeight*oScrollBg.offsetHeight+'px';
+	//拖拽滚动条移动
+	oScroll.onmousedown=function(ev){
+			var ev=ev||event;
+			var T=ev.clientY-oScroll.offsetTop;
+			if(oScroll.setCapture){
+				oScroll.setCapture();
+			}
+			 document.onmousemove=function(ev){
+			 	var ev=ev||event;
+			 	if(ev.clientY-T<0){
+			 		oScroll.style.top=0;
+			 	}
+			 	else if(ev.clientY-T>oScrollBg.offsetHeight-oScroll.offsetHeight)
+			 	{
+			 		oScroll.style.top=oScrollBg.offsetHeight-oScroll.offsetHeight+'px';
+			 	}else{
+			 		oScroll.style.top=ev.clientY-T+'px';	
+			 		oT.style.top=-(ev.clientY-T)*(oT.offsetHeight-oTxt.offsetHeight)/(oScrollBg.offsetHeight-oScroll.offsetHeight)+'px'; 		 	
+			     }
+			 }
+			 document.onmouseup=function(){
+			 	if(oScroll.releaseCapture){
+			 		oScroll.releaseCapture();
+			 	}
+			 	 document.onmousemove=document.onmouseup=null;
+			 }
+			 return false;
+		}
+	 //滚动滚轮进行移动滚动条
+		oTxt.onmousewheel=fn1;
+		if(oTxt.addEventListener){
+			oTxt.addEventListener('DOMMouseScroll',fn1,false);
+		}
+		function fn1(ev){
+			var ev=ev||event;
+			var off=true;
+			if(ev.wheelDelta){
+				off=ev.wheelDelta>0?true:false;
+			}else{
+				off=ev.detail<0?true:false;
+			}
+			
+			if(off){
+				if(oScroll.offsetTop<=0){
+					oScroll.style.top=0;
+				}else{
+					oScroll.style.top=oScroll.offsetTop-4+'px';
+					oT.style.top=-oScroll.offsetTop*(oT.offsetHeight-oTxt.offsetHeight)/(oScrollBg.offsetHeight-oScroll.offsetHeight)+'px';
+				}
+				
+			}else{
+				if(oScroll.offsetTop>=oScrollBg.offsetHeight-oScroll.offsetHeight){
+					oScroll.style.top=oScrollBg.offsetHeight-oScroll.offsetHeight+'px';
+				}else{
+					oScroll.style.top=oScroll.offsetTop+4+'px';
+					oT.style.top=-oScroll.offsetTop*(oT.offsetHeight-oTxt.offsetHeight)/(oScrollBg.offsetHeight-oScroll.offsetHeight)+'px';
+				}
+				
+			}
+			ev.preventDefault();
+			return false;
+		}
+	</script>
+</body>
+</html>
