@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		.small{
+			width: 100px;
+			height: 100px;
+			background: red;	
+	        animation: animated_small infinite 2s linear; /*更多属性请见上述链接中的属性详解*/
+	        margin: 30px;
+		}
+		@keyframes animated_small{
+			 0%     {transform: rotate(0deg);}		    
+		    100%    {transform: rotate(360deg);}
+		}
+	</style>
+</head>
+<body>	
+		<div class="small"></div>
+</body>
+</html>
