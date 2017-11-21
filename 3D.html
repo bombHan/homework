@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		div{margin: 30px;}
+		#box1{
+			width: 100px;
+			height: 100px;
+			background: red;
+			transition: 2s;
+			color: #fff;
+		}
+		#box1:hover{
+			transform: rotateX(360deg);
+			transition: 2s;
+		}
+		#box2{
+			width: 100px;
+			height: 100px;
+			background: red;
+			transition: 2s;
+			color: #fff;
+		}
+		#box2:hover{
+			transform: rotateY(360deg);
+			transition: 2s;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1">
+		碰到我会上下3D旋转哦！
+	</div>
+	
+	<div id="box2">
+		碰到我会左右3D选装哦！
+	</div>
+</body>
+</html>
