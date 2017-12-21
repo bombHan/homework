@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="`">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+        body{
+            padding: 0 0 100px 20px;
+        }
+        .button { padding: 0.5em 0.75em; background-color: red; }
+        .button--secondary { background-color: green; }
+                    
+        thead{
+            color: green;
+        }
+        tbody{
+            color: red;
+        }
+        tfoot{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <button class="button">Primary button</button>
+    <button class="button button--secondary">Secondary button</button>
+    <a download="pic" href="https://www.w3cplus.com/sites/default/files/blogs/2017/1708/css-architecture-1.png">a标签的download属性可以用来下载</a>
+    <p>以下测试文字
+        <br>
+        <em>被强调的文本em</em><br>
+        <strong>我是重要的文本strong</strong><br>
+        <i>我是斜体文本i</i><br>
+        <b>我是粗文本b</b><br>
+        <sub>我是下标签</sub>
+        <sup>我是上标签</sup><br>
+        <code>这是电脑代码</code>
+    </p>
+    <table border="4">
+        <thead>
+            <tr>
+                <th>头绿色 thead是头 tr是行</th>
+                <th>thead是头 th是一个单元格（代表列）</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th>脚蓝色 tfoot是底部 tr是行</th>
+                <th>tfoot是底部 th是一个单元格（代表列）</th>
+            </tr>
+        </tfoot>
+        <tbody>
+                <tr>
+                    <th>主体红色 tbody是主体 tr是行</th>
+                    <th>tbody是主体 th是一个单元格（代表列）</th>
+                </tr>
+            </tbody>
+
+    </table>
+    <q>这是q标签会自带引号</q>
+    <blockquote >
+        这是blockquote标签定义摘自另一个源的块引用。
+    </blockquote>
+
+    <select size="4">
+        <option value="select1">选项1</option>
+        <option value="select2">选项2</option>
+        <option value="select3">选项3</option>
+        <option value="select4">选项4</option>
+        <option value="select4">选项5</option>
+        <option value="select4">选项6</option>
+    </select>
+    <select >
+            <option value="select1">选项1</option>
+            <option value="select2">选项2</option>
+            <option value="select3">选项3</option>
+            <option value="select4">选项4</option>
+            <option value="select4">选项5</option>
+            <option value="select4">选项6</option>
+    </select>
+
+    <textarea name="test" id="testArea" cols="20" rows="10" readonly="readonly">
+        我是一个只读的文本框
+    </textarea>
+    <textarea name="" id="" cols="20" rows="10" disabled='disabled'>这是一个规定被禁用的文本框被禁用的文本区域既不可用，文本也不可选择（不能被复制）。</textarea>
+
+    <form>
+        <fieldset>
+            <legend>这是form里新的fieldset标签</legend>
+            名字: <input type="text"><br>
+            邮件: <input type="text"><br>
+            生日: <input type="text">
+        </fieldset>
+    </form>
+    
+    <hr>
+    <p>上面这个标签为hr标签是一根分割线</p>
+    <pre>
+        此例演示如何使用 pre 标签
+        对空行和    空格
+        进行控制
+    </pre>
+
+    <ol reversed="reversed">
+        <li>任务1(这是一个前面序号倒叙的列表)</li>
+        <li>任务2</li>
+        <li>任务3</li>
+        <li>任务4</li>
+        <li>任务5</li>
+        <li>任务6</li>
+    </ol>
+
+    <dl>
+        <dt>dt项目名1(外面需要一个dl标签套住)</dt>
+        <dd>dd项目内容一</dd>
+        <dt>dt项目名2</dt>
+        <dd>dd项目内容二</dd>
+    </dl>
+    <iframe src="http://www.runoob.com/tags/tag-iframe.html" width="80%" height="300px">
+        <p>您的浏览器不支持iframe</p>
+    </iframe>
+
+    <object data="http://player.youku.com/embed/XMzI0NDgwMzIwNA==" width="400px" height="400px">
+            object 标签用于包含对象，比如图像、音频、视频、Java applets、ActiveX、PDF 以及 Flash。
+    </object>
+     
+    <details>
+        <summary>(我们都是h5标签)我是summary标签，外面有个details套着</summary>
+        <p>我们下面是一个个p标签是details的具体内容</p>
+        <p>你好啊我是丰富的内容哦！</p>
+    </details>
+    <dialog open>
+        你好我是dialog标签！(h5标签只有Safari和Chrome支持)
+    </dialog>
+
+
+  
+</body>
+
+</html>
